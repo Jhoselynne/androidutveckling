@@ -1,6 +1,14 @@
 TODO
 
+Krav Godkänt
 #1 - RecyclerView
+   - Ska ha ikoner bredvid text
 #2 - Present ArrayList inside RecyclerView
+#3 - Search bar -> Lektion 17
+#4 - gestures
+#5 - ViewModel class
+#6 - Föra över data från en activity till en annan
 
-Input
+Välgodkänt
+#7 - Passa vidare data från Activity —> Fragment
+#8 - Be "permissions" att använda ex. internet. (Detta sker i form av en popup)

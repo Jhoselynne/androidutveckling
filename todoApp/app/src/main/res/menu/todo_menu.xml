@@ -18,6 +18,11 @@
         />
 
     <item
+        android:id="@+id/important"
+        android:title="Important"
+        />
+
+    <item
         android:id="@+id/shoppingList"
         android:title="Shopping"
         />

@@ -23,6 +23,10 @@ open class Menu: AppCompatActivity() {
                 todo()
                 true
             }
+            R.id.important -> {
+                important()
+                true
+            }
             R.id.shoppingList -> {
                 shopping()
                 true
@@ -34,6 +38,10 @@ open class Menu: AppCompatActivity() {
 
     private fun todo() {
         Toast.makeText(this, "Write some task", Toast.LENGTH_LONG).show()
+    }
+
+    private fun important() {
+        Toast.makeText(this, "Something important goes here", Toast.LENGTH_LONG).show()
     }
 
     private fun shopping() {
