@@ -6,15 +6,8 @@ import android.view.ViewGroup
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 
-internal class ItemAdapter(private var itemsList: ArrayList<String>)
+internal class ItemAdapter (private var items: ArrayList<Item>)
     : RecyclerView.Adapter<ItemAdapter.MyViewHolder> () {
-
-    // Filter list for search
-    /* var itemFilterList = ArrayList<String>()
-
-    init {
-        itemFilterList = itemsList
-    } */
 
     internal inner class MyViewHolder(view: View):
         RecyclerView.ViewHolder(view) {
@@ -28,17 +21,16 @@ internal class ItemAdapter(private var itemsList: ArrayList<String>)
     }
 
     override fun onBindViewHolder(holder: MyViewHolder, position: Int) {
-        val item = itemsList[position]
-        holder.itemTextView.text = item
+        val item = items[position]
+        holder.itemTextView.text = item.name
 
         holder.itemTextView.setOnClickListener() {
-            println(item)
+            println("item name: " + item.name)
+            // onItemClick?.invoke(item)
         }
     }
 
     override fun getItemCount(): Int {
-        return itemsList.size
+        return items.size
     }
-
-
 }
