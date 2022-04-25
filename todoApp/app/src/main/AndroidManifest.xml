@@ -10,7 +10,10 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.TodoList">
         <activity
-            android:name="com.jossan.todoApp.MainActivity"
+            android:name=".TodoActivity"
+            android:exported="false" />
+        <activity
+            android:name=".MainActivity"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
