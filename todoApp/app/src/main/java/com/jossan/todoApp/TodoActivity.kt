@@ -1,7 +1,10 @@
 package com.jossan.todoApp
 
+import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.widget.EditText
+import android.widget.ImageButton
 import android.widget.TextView
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
@@ -17,23 +20,36 @@ class TodoActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_todo)
 
+
+        // val input = findViewById<EditText>(R.id.editTextTextMultiLine3)
+        // val inputValue = input.text
+
+
+        // Get data from MainActivity
         val listItem = intent.getParcelableExtra<ListItem>("listItem")
         val listItemIndex = intent.getIntExtra("index", -1)
         println("listItem: " + listItem?.name)
         println("listItemIndex: " + listItemIndex)
 
+        if (listItem != null) {                                             // Check if NOT null
+            for (i in 0 until listItem.items?.size!!)                       // For loop until Size
+                                                                            // OBJECT = index (i)
+                println("DEBUGGING #2 " + listItem.items?.get(i)?.name)     // GET index.name
+            // println("listItem.Items: " + listItem?.items)
+
+        }
+        // listItem?.items?.add(Item(inputValue.toString()))      // Kolla på det!!
+
         if(listItem != null) {
             val textView : TextView = findViewById(R.id.todoTV)
 
             textView.text = listItem.name
-            println(listItem.items)
             // prepareItems(listItem.items)
 
-            // använd kod under för olika ikoner
-            // imageView.setImageResource(item.image)
+            // imageView.setImageResource(item.image)       // använd kod för olika ikoner
+            listItem.items?.add(Item("Six"))            // Add new item to listItem
         }
 
-        // DEBUGGING
         val recyclerView: RecyclerView = findViewById(R.id.rv_todo)
         // itemAdapter = ItemAdapter(items)
         //this.items = listItem!!.items!!
@@ -44,30 +60,24 @@ class TodoActivity : AppCompatActivity() {
         //recyclerView.adapter = itemAdapter
         recyclerView.adapter = ItemAdapter(listItem!!.items!!)
 
-        // DEBUGGING
 
-        }
+        val backBtn = findViewById<ImageButton>(R.id.imageButton)
 
-    // DEBUGGING
-   /*  private fun prepareItems(items: ArrayList<Item>?) {
+        backBtn.setOnClickListener {
+            val intent = Intent(this, MainActivity::class.java)
 
-        if (items != null) {
-            for (item in items) {
-                this.items.add(item)
+            if (listItem != null) {                                                 // Check if NOT null
+                for (i in 0 until listItem.items?.size!!) {                         // For loop until Size
+                    // OBJECT = index (i)
+                    println("DEBUGGING #3 " + listItem.items?.get(i)?.name)         // Get index.name
+                    intent.putExtra("items", listItem.items?.get(i)?.name)
+                }
+
+                println("Samma Index som tidigare: " + listItemIndex)
+                intent.putExtra("index", listItemIndex)
             }
+
+            startActivity(intent)
         }
-
-    */
-        // DEBUGGING
-        /* for (i in 0..20) {
-            itemList.add(ListItem("To do"))
-            itemList.add(ListItem("Important"))
-            itemList.add(ListItem("Shopping"))
-
-            itemAdapter.notifyDataSetChanged()
-        }
-
-    }*/
-    // DEBUGGING
-
+    }
 }

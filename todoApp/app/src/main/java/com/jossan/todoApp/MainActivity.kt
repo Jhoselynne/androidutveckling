@@ -35,7 +35,6 @@ class MainActivity : Menu() {
 
             println("itemList name: " + it.name)
             println("itemList index: " + listItemIndex)
-            // println("itemList xxx: " + itemList)
 
             val intent = Intent(this, TodoActivity::class.java)
             intent.putExtra("listItem", it)
