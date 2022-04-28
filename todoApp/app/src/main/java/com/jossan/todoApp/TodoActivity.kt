@@ -3,6 +3,7 @@ package com.jossan.todoApp
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.widget.Button
 import android.widget.EditText
 import android.widget.ImageButton
 import android.widget.TextView
@@ -10,9 +11,6 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 
 class TodoActivity : AppCompatActivity() {
-
-    // private val input = findViewById<EditText>(R.id.etAddTask)
-    // private val inputTask = input.text
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -24,20 +22,13 @@ class TodoActivity : AppCompatActivity() {
         println("listItem: " + listItem?.name)
         println("listItemIndex: " + listItemIndex)
 
+        /*
         if (listItem != null) {                                             // Check if NOT null
             for (i in 0 until listItem.items?.size!!)                       // For loop until Size
             // OBJECT = index (i)
                 println("DEBUGGING #2 " + listItem.items?.get(i)?.name)     // GET index.name
             // println("listItem.Items: " + listItem?.items)
 
-        }
-
-        /*
-        input.setOnClickListener() {
-            if (inputTask.isNotEmpty()) {
-                listItem?.items?.add(Item(inputTask.toString()))      // Kod för att lägga till ett item via input
-                inputTask.clear()
-            }
         }
         */
 
@@ -48,14 +39,24 @@ class TodoActivity : AppCompatActivity() {
             // prepareItems(listItem.items)
 
             // imageView.setImageResource(item.image)       // använd kod för olika ikoner
-            listItem.items?.add(Item("Six"))            // Add new item to listItem
+            // listItem.items?.add(Item("Six"))            // Add new item to listItem
+        }
+
+        val btnAdd = findViewById<Button>(R.id.btnAdd)
+        val input = findViewById<EditText>(R.id.etAddTask)
+        val inputTask = input.text
+
+        btnAdd.setOnClickListener() {
+            if (inputTask.isNotEmpty()) {
+                listItem?.items?.add(Item(inputTask.toString()))      // Kod för att lägga till ett item via input
+                inputTask.clear()
+            }
         }
 
         val recyclerView: RecyclerView = findViewById(R.id.rv_todo)
         val layoutManager = LinearLayoutManager(applicationContext)
         recyclerView.layoutManager = layoutManager
         recyclerView.adapter = ItemAdapter(listItem!!.items!!)
-
 
         val backBtn = findViewById<ImageButton>(R.id.imageButton)
 
