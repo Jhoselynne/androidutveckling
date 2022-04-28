@@ -16,11 +16,12 @@ class MainActivity : Menu() {
         setContentView(R.layout.activity_main)
 
         val recyclerView: RecyclerView = findViewById(R.id.recyclerView)
-        listItemAdapter = ListItemAdapter(itemList)
+        listItemAdapter = ListItemAdapter(itemList)         // listItemAdapter = ListItemAdapter(mutableListOf())
         val layoutManager = LinearLayoutManager(applicationContext)
         recyclerView.layoutManager = layoutManager
         recyclerView.adapter = listItemAdapter
         prepareItems()
+        updateItemList()
     }
 
     private fun prepareItems() {
@@ -48,6 +49,23 @@ class MainActivity : Menu() {
             *   #4 - Implement empty array
             * */
 
+        }
+    }
+
+    private fun updateItemList() {
+        // Get updated ITEM
+        val updateItems = intent.getParcelableExtra<ListItem>("items")
+        val listItemIndex = intent.getIntExtra("sameIndex", -1)
+        //println("UPDATE ITEMS: " + updateItems?.items?.get(2)?.name)
+
+        if (updateItems != null) {         // Check if NOT null
+            for (i in 0 until updateItems.items?.size!!) {
+                println("update items: " + updateItems.items?.get(i)?.name)
+                //itemList.set(listItemIndex, updateItems.items?.get(i)?.name)
+                itemList.set(listItemIndex, updateItems)
+                //println("Debugging: " + itemList[listItemIndex].items?.get(i)?.name)
+            }
+            println("SAME INDEX: " + listItemIndex)
         }
     }
 }
