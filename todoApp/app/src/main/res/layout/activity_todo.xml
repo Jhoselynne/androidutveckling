@@ -21,27 +21,44 @@
         android:id="@+id/rv_todo"
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        app:layout_constraintBottom_toTopOf="@+id/editTextTextMultiLine3"
-        app:layout_constraintTop_toBottomOf="@+id/todoTV"
+        app:layout_constraintBottom_toTopOf="@+id/etAddTask"
+        app:layout_constraintTop_toBottomOf="@+id/imageButton"
         app:layout_constraintHorizontal_bias="0.0"
          />
 
     <EditText
-        android:id="@+id/editTextTextMultiLine3"
-        android:layout_width="match_parent"
+        android:id="@+id/etAddTask"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:background="@color/gray"
         android:drawableStart="@drawable/ic_baseline_add_circle_outline_24"
-        android:drawableTint="@color/white"
         android:drawablePadding="@dimen/drawable_padding"
+        android:drawableTint="@color/white"
         android:ems="10"
         android:gravity="start|center_vertical"
         android:hint="Task to do"
         android:inputType="textMultiLine"
         android:minHeight="48dp"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/btnAdd"
         app:layout_constraintStart_toStartOf="parent" />
+
+    <Button
+        android:id="@+id/btnAdd"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Add"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent" />
+
+    <ImageButton
+        android:id="@+id/imageButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="?attr/homeAsUpIndicator"
+        tools:ignore="SpeakableTextPresentCheck" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>
