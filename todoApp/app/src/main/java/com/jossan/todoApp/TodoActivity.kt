@@ -11,19 +11,12 @@ import androidx.recyclerview.widget.RecyclerView
 
 class TodoActivity : AppCompatActivity() {
 
-    // DEBUGGING
-    // private var items = ArrayList<Item>()
-    // private lateinit var itemAdapter: ItemAdapter
-    // DEBUGGING
+    // private val input = findViewById<EditText>(R.id.etAddTask)
+    // private val inputTask = input.text
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_todo)
-
-
-        // val input = findViewById<EditText>(R.id.editTextTextMultiLine3)
-        // val inputValue = input.text
-
 
         // Get data from MainActivity
         val listItem = intent.getParcelableExtra<ListItem>("listItem")
@@ -33,15 +26,23 @@ class TodoActivity : AppCompatActivity() {
 
         if (listItem != null) {                                             // Check if NOT null
             for (i in 0 until listItem.items?.size!!)                       // For loop until Size
-                                                                            // OBJECT = index (i)
+            // OBJECT = index (i)
                 println("DEBUGGING #2 " + listItem.items?.get(i)?.name)     // GET index.name
             // println("listItem.Items: " + listItem?.items)
 
         }
-        // listItem?.items?.add(Item(inputValue.toString()))      // Kolla på det!!
 
-        if(listItem != null) {
-            val textView : TextView = findViewById(R.id.todoTV)
+        /*
+        input.setOnClickListener() {
+            if (inputTask.isNotEmpty()) {
+                listItem?.items?.add(Item(inputTask.toString()))      // Kod för att lägga till ett item via input
+                inputTask.clear()
+            }
+        }
+        */
+
+        if (listItem != null) {
+            val textView: TextView = findViewById(R.id.todoTV)
 
             textView.text = listItem.name
             // prepareItems(listItem.items)
@@ -51,13 +52,8 @@ class TodoActivity : AppCompatActivity() {
         }
 
         val recyclerView: RecyclerView = findViewById(R.id.rv_todo)
-        // itemAdapter = ItemAdapter(items)
-        //this.items = listItem!!.items!!
-        //itemAdapter = ItemAdapter(this.items)
-        //itemAdapter = ItemAdapter(listItem!!.items!!)
         val layoutManager = LinearLayoutManager(applicationContext)
         recyclerView.layoutManager = layoutManager
-        //recyclerView.adapter = itemAdapter
         recyclerView.adapter = ItemAdapter(listItem!!.items!!)
 
 
@@ -70,11 +66,13 @@ class TodoActivity : AppCompatActivity() {
                 for (i in 0 until listItem.items?.size!!) {                         // For loop until Size
                     // OBJECT = index (i)
                     println("DEBUGGING #3 " + listItem.items?.get(i)?.name)         // Get index.name
-                    intent.putExtra("items", listItem.items?.get(i)?.name)
+                    // println("TESTING: " + listItem.items)
+                    //intent.putExtra("items", listItem.items?.get(i)?.name.toString())
                 }
 
-                println("Samma Index som tidigare: " + listItemIndex)
-                intent.putExtra("index", listItemIndex)
+                // println("Samma Index som tidigare: " + listItemIndex)        // Ta bort
+                intent.putExtra("sameIndex", listItemIndex)
+                intent.putExtra("items", listItem)
             }
 
             startActivity(intent)
