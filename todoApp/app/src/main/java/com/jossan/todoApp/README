@@ -1,14 +1,32 @@
 TODO
 
 Krav Godkänt
-#1 - RecyclerView
-   - Ska ha ikoner bredvid text
-#2 - Present ArrayList inside RecyclerView
+#1 - RecyclerView                                   - DONE
+   - Ska ha ikoner bredvid text                     - DONE
+#2 - Present ArrayList inside RecyclerView          - DONE
 #3 - Search bar -> Lektion 17
-#4 - gestures
-#5 - ViewModel class
-#6 - Föra över data från en activity till en annan
+#4 - gestures -> Lektion 24
+#5 - ViewModel class                                - Done (har ej koppling till min To do app)
+#6 - Föra över data från en activity till en annan  - DONE
 
 Välgodkänt
 #7 - Passa vidare data från Activity —> Fragment
 #8 - Be "permissions" att använda ex. internet. (Detta sker i form av en popup)
+
+
+
+/* TODO - Send Data, Receive Data, Update List
+            *   #1 - Send data to another Activity          - DONE
+            *   #2 - GET data (index and Name)              - DONE
+            *   #3 - Go back to mainActivity, Update ITEM at position index     - DONE
+            *   #4 - Implement empty array                  - DONE
+            * */
+
+
+/* TODO - Create ViewModel
+            *   #1 - Create ViewModel with string value     - DONE
+            *   #2 - Display ViewModel string value         - DONE
+            *   #3 - roted phone                            - DONE
+            *   -----------------------------------------
+            *   #4 - convert my other items to ViewModel - optional
+            * */
