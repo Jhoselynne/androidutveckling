@@ -12,9 +12,14 @@ import androidx.recyclerview.widget.RecyclerView
 
 class TodoActivity : AppCompatActivity() {
 
+    // private lateinit var viewModel: TodoViewModelViewModel
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_todo)
+
+        // Connection to ViewModel + Instantiating
+        // viewModel = ViewModelProvider(this)[TodoViewModel::class.java]
 
         // Get data from MainActivity
         val listItem = intent.getParcelableExtra<ListItem>("listItem")
@@ -48,6 +53,7 @@ class TodoActivity : AppCompatActivity() {
 
         btnAdd.setOnClickListener() {
             if (inputTask.isNotEmpty()) {
+                // viewModel.items?.add(Item(inputTask.toString()))
                 listItem?.items?.add(Item(inputTask.toString()))      // Kod för att lägga till ett item via input
                 inputTask.clear()
             }
