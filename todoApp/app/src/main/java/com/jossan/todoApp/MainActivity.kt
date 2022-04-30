@@ -2,18 +2,38 @@ package com.jossan.todoApp
 
 import android.content.Intent
 import android.os.Bundle
+import android.widget.Button
+import android.widget.TextView
+import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.jossan.todoApp.ViewModel.MainViewModel
 
 class MainActivity : Menu() {
 
-    // private val itemList = ArrayList<String>()
+    private lateinit var viewModel: MainViewModel
+
     private val itemList = ArrayList<ListItem>()
     private lateinit var listItemAdapter: ListItemAdapter
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
+
+        // Id's for ViewModel
+        val tvViewModel = findViewById<TextView>(R.id.tvViewModel)
+        val changeViewModel = findViewById<Button>(R.id.btnViewModel)
+
+        // Connection to ViewModel + Instantiating
+        viewModel = ViewModelProvider(this)[MainViewModel::class.java]
+
+        tvViewModel.text = viewModel.name       // Init value
+
+        changeViewModel.setOnClickListener() {
+            viewModel.addNemo()
+
+            tvViewModel.text = viewModel.name       // Set value
+        }
 
         val recyclerView: RecyclerView = findViewById(R.id.recyclerView)
         listItemAdapter = ListItemAdapter(itemList)         // listItemAdapter = ListItemAdapter(mutableListOf())
@@ -26,7 +46,7 @@ class MainActivity : Menu() {
 
     private fun prepareItems() {
         itemList.add(ListItem("To do", arrayListOf(Item("Ett"), Item("Två"), Item("Tre"))))
-        itemList.add(ListItem("Important", arrayListOf(Item("One"), Item("Two"), Item("Three"))))
+        itemList.add(ListItem("Groceries", arrayListOf(Item("Coffee"))))
         itemList.add(ListItem("Shopping", arrayListOf()))
 
         // listItemAdapter.notifyDataSetChanged()
@@ -41,14 +61,6 @@ class MainActivity : Menu() {
             intent.putExtra("listItem", it)
             intent.putExtra("index", listItemIndex)
             startActivity(intent)
-
-            /* TODO - Send Data, Receive Data, Update List
-            *   #1 - Send data to another Activity
-            *   #2 - GET data (index and Name)
-            *   #3 - Go back to mainActivity, Update ITEM at position index
-            *   #4 - Implement empty array
-            * */
-
         }
     }
 
