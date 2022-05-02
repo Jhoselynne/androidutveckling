@@ -19,6 +19,7 @@ class MainActivity : Menu() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
+        println("MainActivity - onCreate()")
 
         // Id's for ViewModel
         val tvViewModel = findViewById<TextView>(R.id.tvViewModel)
@@ -44,9 +45,39 @@ class MainActivity : Menu() {
         updateItemList()
     }
 
+    /*
+    override fun onStart() {
+        super.onStart()
+        println("MainActivity - onStart()")
+    }
+
+    override fun onResume() {
+        super.onResume()
+        println("MainActivity - onResume()")
+    }
+
+    override fun onRestart() {
+        super.onRestart()
+        println("MainActivity - onRestart()")
+    }
+
+    override fun onPause() {
+        super.onPause()
+        println("MainActivity - onPause()")
+    }
+
+    override fun onStop() {
+        super.onStop()
+        println("MainActivity - onStop()")
+    }
+
+    override fun onDestroy() {
+        super.onDestroy()
+        println("MainActivity - onDestroy()")
+    }   */
+
     private fun prepareItems() {
-        itemList.add(ListItem("To do", arrayListOf(Item("Ett"), Item("Två"), Item("Tre"))))
-        itemList.add(ListItem("Groceries", arrayListOf(Item("Coffee"))))
+        itemList.add(ListItem("To do", arrayListOf(Item("Buy Coffee"), Item("Bean"))))
         itemList.add(ListItem("Shopping", arrayListOf()))
 
         // listItemAdapter.notifyDataSetChanged()
@@ -63,6 +94,13 @@ class MainActivity : Menu() {
             startActivity(intent)
         }
     }
+
+    /*
+    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+        super.onActivityResult(requestCode, resultCode, data)
+        val index = data?.getIntExtra("sameIndex", -1)
+        println("MainActivity - onActivityResult - index = " + index)
+    }   */
 
     private fun updateItemList() {
         // Get updated ITEM
