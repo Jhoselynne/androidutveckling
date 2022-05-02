@@ -2,8 +2,14 @@ package com.jossan.todoApp
 
 import android.os.Parcel
 import android.os.Parcelable
+import java.util.*
 
 class Item (var name: String) : Parcelable {
+    var id: String = ""
+
+    init {
+        id = UUID.randomUUID().toString()
+    }
 
     constructor(parcel: Parcel) : this(
         name = parcel.readString()?: "",

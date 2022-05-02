@@ -25,6 +25,19 @@ class TodoActivity : AppCompatActivity() {
         // Connection to ViewModel + Instantiating
         // viewModel = ViewModelProvider(this)[TodoViewModel::class.java]
 
+        val searchView = findViewById<androidx.appcompat.widget.SearchView>(R.id.search_bar)
+
+        searchView.setOnQueryTextListener(object: androidx.appcompat.widget.SearchView.OnQueryTextListener {
+            override fun onQueryTextSubmit(query: String?): Boolean {
+                return false
+            }
+
+            override fun onQueryTextChange(newText: String?): Boolean {
+                itemAdapter.getFilter().filter(newText)
+                return false
+            }
+        })
+
         // Get data from MainActivity
         val listItem = intent.getParcelableExtra<ListItem>("listItem")
         val listItemIndex = intent.getIntExtra("index", -1)
@@ -59,6 +72,7 @@ class TodoActivity : AppCompatActivity() {
             if (inputTask.isNotEmpty()) {
                 // viewModel.items?.add(Item(inputTask.toString()))
                 listItem?.items?.add(Item(inputTask.toString()))      // Kod för att lägga till ett item via input
+                itemAdapter.notifyItemInserted(itemAdapter.itemCount)
                 inputTask.clear()
             }
         }
@@ -75,14 +89,16 @@ class TodoActivity : AppCompatActivity() {
 
                 when(direction) {
                     ItemTouchHelper.LEFT -> {
-                        itemAdapter.deleteItem(viewHolder.absoluteAdapterPosition)
+                        itemAdapter.deleteItem(viewHolder)
+                        // println("viewHolder " + viewHolder.bindingAdapterPosition)
+                        //itemAdapter.deleteItem(viewHolder.absoluteAdapterPosition)
                         // itemAdapter.deleteItem(viewHolder)
                     }
 
-                    ItemTouchHelper.RIGHT -> {
+                    /*ItemTouchHelper.RIGHT -> {
                         itemAdapter.deleteItem(viewHolder.absoluteAdapterPosition)
                         // itemAdapter.deleteItem(viewHolder)
-                    }
+                    } */
                 }
             }
         }
