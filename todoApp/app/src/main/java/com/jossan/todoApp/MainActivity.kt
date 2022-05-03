@@ -13,7 +13,7 @@ class MainActivity : Menu() {
 
     private lateinit var viewModel: MainViewModel
 
-    private val itemList = ArrayList<ListItem>()
+    private var itemList = ArrayList<ListItem>()
     private lateinit var listItemAdapter: ListItemAdapter
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -37,15 +37,14 @@ class MainActivity : Menu() {
         }
 
         val recyclerView: RecyclerView = findViewById(R.id.recyclerView)
-        listItemAdapter = ListItemAdapter(itemList)         // listItemAdapter = ListItemAdapter(mutableListOf())
+        listItemAdapter = ListItemAdapter(itemList)
         val layoutManager = LinearLayoutManager(applicationContext)
         recyclerView.layoutManager = layoutManager
         recyclerView.adapter = listItemAdapter
         prepareItems()
-        updateItemList()
+        //updateItemList()
     }
 
-    /*
     override fun onStart() {
         super.onStart()
         println("MainActivity - onStart()")
@@ -74,7 +73,7 @@ class MainActivity : Menu() {
     override fun onDestroy() {
         super.onDestroy()
         println("MainActivity - onDestroy()")
-    }   */
+    }
 
     private fun prepareItems() {
         itemList.add(ListItem("To do", arrayListOf(Item("Buy Coffee"), Item("Bean"))))
@@ -85,37 +84,41 @@ class MainActivity : Menu() {
         listItemAdapter.onItemClick = {
             val listItemIndex = itemList.indexOf(it)
 
-            println("itemList name: " + it.name)
-            println("itemList index: " + listItemIndex)
-
             val intent = Intent(this, TodoActivity::class.java)
             intent.putExtra("listItem", it)
             intent.putExtra("index", listItemIndex)
-            startActivity(intent)
+            startActivityForResult(intent, 1)
         }
     }
 
-    /*
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         super.onActivityResult(requestCode, resultCode, data)
-        val index = data?.getIntExtra("sameIndex", -1)
-        println("MainActivity - onActivityResult - index = " + index)
-    }   */
+        if (requestCode == 1) {
+            val index = data?.getIntExtra("sameIndex", -1)
+            var index2 = -1
+            if (index != null) {
+                index2 = index
+            }
+            println("MainActivity - onActivityResult - index = " + index)
+            val itemList2 = data!!.getParcelableExtra<ListItem>("items")
+            println("MainActivity - onActivityResult - itemList.items.size = " + itemList2?.items?.size)
+            if (itemList2 != null) {         // Check if NOT null
+                itemList.set(index2, itemList2)
+                listItemAdapter.notifyDataSetChanged()
+            }
+        }
+    }
 
     private fun updateItemList() {
         // Get updated ITEM
         val updateItems = intent.getParcelableExtra<ListItem>("items")
         val listItemIndex = intent.getIntExtra("sameIndex", -1)
-        //println("UPDATE ITEMS: " + updateItems?.items?.get(2)?.name)
 
         if (updateItems != null) {         // Check if NOT null
             for (i in 0 until updateItems.items?.size!!) {
                 println("update items: " + updateItems.items?.get(i)?.name)
-                //itemList.set(listItemIndex, updateItems.items?.get(i)?.name)
                 itemList.set(listItemIndex, updateItems)
-                //println("Debugging: " + itemList[listItemIndex].items?.get(i)?.name)
             }
-            println("SAME INDEX: " + listItemIndex)
         }
     }
 }

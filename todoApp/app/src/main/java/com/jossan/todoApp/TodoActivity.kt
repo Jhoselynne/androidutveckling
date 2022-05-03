@@ -58,10 +58,7 @@ class TodoActivity : AppCompatActivity() {
             val textView: TextView = findViewById(R.id.todoTV)
 
             textView.text = listItem.name
-            // prepareItems(listItem.items)
-
             // imageView.setImageResource(item.image)       // använd kod för olika ikoner
-            // listItem.items?.add(Item("Six"))            // Add new item to listItem
         }
 
         val btnAdd = findViewById<Button>(R.id.btnAdd)
@@ -103,24 +100,19 @@ class TodoActivity : AppCompatActivity() {
 
         backBtn.setOnClickListener {
             val intent = Intent(this, MainActivity::class.java)
-            // val intent = Intent()
 
             if (listItem != null) {                                                 // Check if NOT null
                 for (i in 0 until listItem.items?.size!!) {                         // For loop until Size
                     // OBJECT = index (i)
                     println("DEBUGGING #3 " + listItem.items?.get(i)?.name)         // Get index.name
-                    // println("TESTING: " + listItem.items)
-                    //intent.putExtra("items", listItem.items?.get(i)?.name.toString())
                 }
 
-                // println("Samma Index som tidigare: " + listItemIndex)        // Ta bort
                 intent.putExtra("sameIndex", listItemIndex)
                 intent.putExtra("items", listItem)
-                
             }
-            // setResult(Activity.RESULT_OK, intent)
-            // super.finish()
-            startActivity(intent)
+
+            setResult(Activity.RESULT_OK, intent)
+            finish()
         }
     }
     /*
