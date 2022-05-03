@@ -46,9 +46,12 @@ internal class ItemAdapter (private var items: ArrayList<Item>)
         println("deletedItem - filteredIndex: " + filteredIndex)
         println("deletedItem - item.id: " + item.id)
         println("deletedItem - index: " + index)
+        println("deletedItem - items === itemsFiltered: " + (items === itemsFiltered))
 
         items.removeAt(index)
-        itemsFiltered.removeAt(filteredIndex)
+        if(items !== itemsFiltered) {
+            itemsFiltered.removeAt(filteredIndex)
+        }
 
         notifyItemRemoved(filteredIndex)
     }

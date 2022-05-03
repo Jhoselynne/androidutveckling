@@ -72,8 +72,8 @@ class TodoActivity : AppCompatActivity() {
             if (inputTask.isNotEmpty()) {
                 // viewModel.items?.add(Item(inputTask.toString()))
                 listItem?.items?.add(Item(inputTask.toString()))      // Kod för att lägga till ett item via input
-                itemAdapter.notifyItemInserted(itemAdapter.itemCount)
                 inputTask.clear()
+                itemAdapter.notifyItemInserted(itemAdapter.itemCount)
             }
         }
 
@@ -90,15 +90,7 @@ class TodoActivity : AppCompatActivity() {
                 when(direction) {
                     ItemTouchHelper.LEFT -> {
                         itemAdapter.deleteItem(viewHolder)
-                        // println("viewHolder " + viewHolder.bindingAdapterPosition)
-                        //itemAdapter.deleteItem(viewHolder.absoluteAdapterPosition)
-                        // itemAdapter.deleteItem(viewHolder)
                     }
-
-                    /*ItemTouchHelper.RIGHT -> {
-                        itemAdapter.deleteItem(viewHolder.absoluteAdapterPosition)
-                        // itemAdapter.deleteItem(viewHolder)
-                    } */
                 }
             }
         }
