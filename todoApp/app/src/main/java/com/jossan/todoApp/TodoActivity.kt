@@ -27,6 +27,8 @@ class TodoActivity : AppCompatActivity() {
 
         // ID's
         val searchView = findViewById<androidx.appcompat.widget.SearchView>(R.id.search_bar)
+        val btnAdd = findViewById<Button>(R.id.btnAdd)
+        val backBtn = findViewById<ImageButton>(R.id.imageButton)
 
         searchView.setOnQueryTextListener(object: androidx.appcompat.widget.SearchView.OnQueryTextListener {
             override fun onQueryTextSubmit(query: String?): Boolean {
@@ -62,7 +64,6 @@ class TodoActivity : AppCompatActivity() {
             // imageView.setImageResource(item.image)       // Use code for different icons
         }
 
-        val btnAdd = findViewById<Button>(R.id.btnAdd)
         val input = findViewById<EditText>(R.id.etAddTask)
         val inputTask = input.text
 
@@ -98,9 +99,6 @@ class TodoActivity : AppCompatActivity() {
 
         val touchHelper = ItemTouchHelper(swipeGesture)
         touchHelper.attachToRecyclerView(recyclerView)
-
-
-        val backBtn = findViewById<ImageButton>(R.id.imageButton)
 
         // Send updated data back to MainActivity
         backBtn.setOnClickListener {
