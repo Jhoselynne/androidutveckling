@@ -11,13 +11,6 @@ internal class ListItemAdapter(private var itemsList: ArrayList<ListItem>)
 
     var onItemClick : ((ListItem) -> Unit)? = null
 
-    // Filter list for search
-    /* var itemFilterList = ArrayList<String>()
-
-    init {
-        itemFilterList = itemsList
-    } */
-
     internal inner class MyViewHolder(view: View):
         RecyclerView.ViewHolder(view) {
         var itemTextView: TextView = view.findViewById(R.id.itemTV)

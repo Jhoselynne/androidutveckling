@@ -4,15 +4,14 @@ Krav Godkänt
 #1 - RecyclerView                                   - DONE
    - Ska ha ikoner bredvid text                     - DONE
 #2 - Present ArrayList inside RecyclerView          - DONE
-#3 - Search bar -> Lektion 17
-#4 - gestures -> Lektion 24
-#5 - ViewModel class                                - Done (har ej koppling till min To do app)
+#3 - Search bar -> Lektion 17                       - DONE
+#4 - gestures -> Lektion 24                         - DONE
+#5 - ViewModel class                                - Done
 #6 - Föra över data från en activity till en annan  - DONE
 
 Välgodkänt
 #7 - Passa vidare data från Activity —> Fragment
 #8 - Be "permissions" att använda ex. internet. (Detta sker i form av en popup)
-
 
 
 /* TODO - Send Data, Receive Data, Update List

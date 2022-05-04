@@ -13,6 +13,7 @@ import kotlin.collections.ArrayList
 internal class ItemAdapter (private var items: ArrayList<Item>)
     : RecyclerView.Adapter<ItemAdapter.MyViewHolder> () {
 
+    // Filter list for search
     var itemsFiltered = ArrayList<Item>()
     init {
         itemsFiltered = items
@@ -42,26 +43,18 @@ internal class ItemAdapter (private var items: ArrayList<Item>)
         val filteredIndex = view.absoluteAdapterPosition
         val item = itemsFiltered[filteredIndex]
         val index = items.indexOf(item)
-
+        /*
         println("deletedItem - filteredIndex: " + filteredIndex)
         println("deletedItem - item.id: " + item.id)
         println("deletedItem - index: " + index)
         println("deletedItem - items === itemsFiltered: " + (items === itemsFiltered))
-
+        */
         items.removeAt(index)
         if(items !== itemsFiltered) {
             itemsFiltered.removeAt(filteredIndex)
         }
-
         notifyItemRemoved(filteredIndex)
     }
-    /* fun deleteItem(view: RecyclerView.ViewHolder) {
-        // println("absoluteAdapter: " + view.absoluteAdapterPosition)
-        // items.removeAt(view.absoluteAdapterPosition)
-        // notifyItemRemoved(view.absoluteAdapterPosition)
-    }   */
-
-
 
     /* fun addItem(i : Int, item : Item) {
         items.add(i, item)

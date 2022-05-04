@@ -36,15 +36,49 @@ class MainActivity : Menu() {
             tvViewModel.text = viewModel.name       // Set value
         }
 
+        // Recycler View
         val recyclerView: RecyclerView = findViewById(R.id.recyclerView)
         listItemAdapter = ListItemAdapter(itemList)
         val layoutManager = LinearLayoutManager(applicationContext)
         recyclerView.layoutManager = layoutManager
         recyclerView.adapter = listItemAdapter
         prepareItems()
-        //updateItemList()
     }
 
+    private fun prepareItems() {
+        itemList.add(ListItem("To do", arrayListOf(Item("Buy Coffee"), Item("Bean"))))
+        itemList.add(ListItem("Shopping", arrayListOf()))
+
+        listItemAdapter.onItemClick = {
+            val listItemIndex = itemList.indexOf(it)
+
+            // Intent sends data to TodoActivity
+            val intent = Intent(this, TodoActivity::class.java)
+            intent.putExtra("listItem", it)
+            intent.putExtra("index", listItemIndex)
+            startActivityForResult(intent, 1)
+        }
+    }
+
+    // Get result(data) from TodoActivity
+    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+        super.onActivityResult(requestCode, resultCode, data)
+        if (requestCode == 1) {
+            val index = data?.getIntExtra("sameIndex", -1)
+            var index2 = -1
+            if (index != null) {
+                index2 = index
+            }
+            // println("MainActivity - onActivityResult - index = " + index)
+            val itemList2 = data!!.getParcelableExtra<ListItem>("items")
+            // println("MainActivity - onActivityResult - itemList.items.size = " + itemList2?.items?.size)
+            if (itemList2 != null) {
+                itemList.set(index2, itemList2)                 // Replace ListItem
+                listItemAdapter.notifyDataSetChanged()          // Show updated list
+            }
+        }
+    }
+    /*
     override fun onStart() {
         super.onStart()
         println("MainActivity - onStart()")
@@ -74,51 +108,5 @@ class MainActivity : Menu() {
         super.onDestroy()
         println("MainActivity - onDestroy()")
     }
-
-    private fun prepareItems() {
-        itemList.add(ListItem("To do", arrayListOf(Item("Buy Coffee"), Item("Bean"))))
-        itemList.add(ListItem("Shopping", arrayListOf()))
-
-        // listItemAdapter.notifyDataSetChanged()
-        // itemAdapter.notifyItemChanged(0)
-        listItemAdapter.onItemClick = {
-            val listItemIndex = itemList.indexOf(it)
-
-            val intent = Intent(this, TodoActivity::class.java)
-            intent.putExtra("listItem", it)
-            intent.putExtra("index", listItemIndex)
-            startActivityForResult(intent, 1)
-        }
-    }
-
-    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
-        super.onActivityResult(requestCode, resultCode, data)
-        if (requestCode == 1) {
-            val index = data?.getIntExtra("sameIndex", -1)
-            var index2 = -1
-            if (index != null) {
-                index2 = index
-            }
-            println("MainActivity - onActivityResult - index = " + index)
-            val itemList2 = data!!.getParcelableExtra<ListItem>("items")
-            println("MainActivity - onActivityResult - itemList.items.size = " + itemList2?.items?.size)
-            if (itemList2 != null) {         // Check if NOT null
-                itemList.set(index2, itemList2)
-                listItemAdapter.notifyDataSetChanged()
-            }
-        }
-    }
-
-    private fun updateItemList() {
-        // Get updated ITEM
-        val updateItems = intent.getParcelableExtra<ListItem>("items")
-        val listItemIndex = intent.getIntExtra("sameIndex", -1)
-
-        if (updateItems != null) {         // Check if NOT null
-            for (i in 0 until updateItems.items?.size!!) {
-                println("update items: " + updateItems.items?.get(i)?.name)
-                itemList.set(listItemIndex, updateItems)
-            }
-        }
-    }
+    */
 }

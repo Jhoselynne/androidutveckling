@@ -27,5 +27,4 @@ class ListItem(var name: String, var items: ArrayList<Item>?) : Parcelable {
             return arrayOfNulls(size)
         }
     }
-
 }
